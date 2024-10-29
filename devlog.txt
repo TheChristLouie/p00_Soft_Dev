@@ -1,3 +1,11 @@
-stellaY -- 2024-10-24 11:32 add build_db.py and app.py
+stellaY -- 2024-10-24 11:32 
+add build_db.py and app.py
 
-christopherl -- 2024-10-24 11:32 add digital teamflag
+christopherl -- 2024-10-24 11:32 
+add digital teamflag
+
+christopherl -- 2024-10-29 11:41
+updated README
+
+christopherl -- 2024-10-29 11:41
+Fixed devlog formatting
