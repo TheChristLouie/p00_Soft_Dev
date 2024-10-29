@@ -5,7 +5,7 @@
 # Launch codes:
 # INSTALL GUIDE:
 In terminal, at directory you want the clone:
-git clone git@github.com:TheChristLouie/Soft-Dev.git
+git@github.com:TheChristLouie/p00_Soft_Dev.git
 
 #LAUNCH CODES:
 In Python virtual environment with Flask installed and in the cloned repo:
