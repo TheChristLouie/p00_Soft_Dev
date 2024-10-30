@@ -18,7 +18,7 @@ app.secret_key = secret
 @app.route("/")
 def disp_loginpage():
     if 'username' in session:
-        return redirect("/response.html")
+        return redirect("response.html")
     return render_template( 'login.html' )
 
 @app.route("/response.html" , methods=['GET','POST'])
@@ -35,4 +35,3 @@ def logout():
 if __name__ == "__main__":
     app.debug = True 
     app.run()
->>>>>>> 634f7fa53cb6586dbebcb16a6b40efd152ec6e50
