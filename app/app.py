@@ -31,6 +31,19 @@ def authenticate():
 def logout():
     session.pop('username', None)
     return render_template('logout.html')
+
+'''
+@app.route("/blogs")
+def blog():
+    # add data to the page here from the database
+    return render_template('blogs.html') #there will be more than just "blog.html" here
+
+@app.route("/thisblog")
+def thisblog():
+    # add data to this page based on which blog is selected, probably through an if statment
+    # in other words, take data from the blog entry with the same title as the one that was clicked on
+    return render_template('thisblog.html') #there will be more than just "thisblog.html" here
+'''
     
 if __name__ == "__main__":
     app.debug = True 
