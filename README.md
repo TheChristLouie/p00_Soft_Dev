@@ -4,9 +4,13 @@
 # Summary of Project:
 Blog site where users can post their own blogs, comment on others' blogs, and search for blogs.
 # INSTALL GUIDE:
-In terminal, at directory you want the clone:
-git@github.com:TheChristLouie/p00_Soft_Dev.git
+In terminal, at directory you want the clone inside, clone repo via ssh cloning:\n
+e.g.: git clone git@github.com:TheChristLouie/p00_Soft_Dev.git\n
+Note: You will need a python virtual environment with Flask installed to run the blog site.
 
 # LAUNCH CODES:
-In Python virtual environment with Flask installed and in the cloned repo:
-python3 app.py
+In Python virtual environment with Flask installed and in the cloned repo:\n
+Type in Terminal:\n
+cd p00_Soft_Dev/app.py\n
+python3 app.py\n
+Then open the link, which should take you to the blog login page.
