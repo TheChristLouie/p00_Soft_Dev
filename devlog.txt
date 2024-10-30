@@ -12,3 +12,6 @@ Fixed devlog formatting
 
 jonathanm764 -- 2024-10-29 11:46
 added templates folder with dummy html files
+
+christopherl -- 2024-10-30 11:19
+Moved templates folder into app folder so website rendered.
