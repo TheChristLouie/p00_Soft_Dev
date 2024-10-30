@@ -21,3 +21,6 @@ Moved templates folder into app folder so website rendered.
 
 endriti2 -- 2024-10-30 11:34
 added templates for sites to be added onto app.py
+
+jonathanm764 -- 2024-10-30 11:4
+added footer to all pages saying sexy mermaids
