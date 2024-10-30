@@ -2,6 +2,7 @@
 # CoolBlogWebsite by SexyMermaids
 # Roster: Christopher Louie (PM + Python/Flask), Stella Yampolsky (Backend), Endrit Idrizi (Python/Flask), Jonathan Metzler(HTML)
 # Summary of Project:
+Blog site where users can post their own blogs, comment on others' blogs, and search for blogs.
 # INSTALL GUIDE:
 In terminal, at directory you want the clone:
 git@github.com:TheChristLouie/p00_Soft_Dev.git
