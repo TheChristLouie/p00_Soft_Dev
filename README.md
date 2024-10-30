@@ -1,6 +1,7 @@
 # p00_Soft_Dev
 # CoolBlogWebsite by SexyMermaids
-# Roster: Christopher Louie (PM + Python/Flask), Stella Yampolsky (Backend), Endrit Idrizi (Python/Flask), Jonathan Metzler(HTML)
+# Roster:
+Christopher Louie (PM + Python/Flask), Stella Yampolsky (Backend), Endrit Idrizi (Python/Flask), Jonathan Metzler(HTML)
 # Summary of Project:
 Blog site where users can post their own blogs, comment on others' blogs, and search for blogs.
 # INSTALL GUIDE:
