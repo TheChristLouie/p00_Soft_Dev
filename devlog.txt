@@ -1,3 +1,29 @@
-stellaY -- 2024-10-24 11:32 add build_db.py and app.py
+stellaY -- 2024-10-24 11:32 
+add build_db.py and app.py
 
-christopherl -- 2024-10-24 11:32 add digital teamflag
+christopherl -- 2024-10-24 11:32 
+add digital teamflag
+
+christopherl -- 2024-10-25 11:47
+Revised Design Doc
+
+christopherl -- 2024-10-29 11:41
+updated README
+
+christopherl -- 2024-10-29 11:41
+Fixed devlog formatting
+
+jonathanm764 -- 2024-10-29 11:46
+added templates folder with dummy html files
+
+christopherl -- 2024-10-30 11:19
+Moved templates folder into app folder so website rendered.
+
+endriti2 -- 2024-10-30 11:34
+added templates for sites to be added onto app.py
+
+jonathanm764 -- 2024-10-30 11:40
+added footer to all pages saying sexy mermaids
+
+christopherl -- 2024-10-31 01:28
+Summary of external README review: Our visitor helped us with catching up on tasks we were behind on, such as finding out that we did not actually upload our pdf and instead mistook our placeholder as the pdf, and that our launch/install codes were too simple. Thank you emissary!
