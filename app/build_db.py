@@ -8,20 +8,24 @@ import csv       #facilitate CSV I/O
 #create the database + tables
 #Run before using functions
 #Run only once
-def makedb:
-    DB_FILE="blogs.db"
 
-    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
-    c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
+DB_FILE="blogs.db"
+db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
+
+def makedb():
     c.execute("create table users (username text, password text, blogname text)")
-    c.execute("create table blogs (blogname text, bit empty")
+    c.execute("create table blogs (blogname text, int empty)")
     c.execute("create table entries (blogname text, title text, entry text int date)")
+#When a user registers, before they make their blog
+def addUser(u, p):
+    c.execute("insert into users values(u, p)")
+def addBlog(user, b):
+    c.execute("insert into users select(user)(blogname) values(b)")
 
-def addUser(username, password):
- 
-def updateUser(blogname):
-    
-def
+makedb()
+#addUser("name","1234")
+
 #==========================================================
 # c.execute("create table students (one text, two int, three int)")
 # c.execute("create table courses (one text, two int, three int)")
@@ -42,5 +46,5 @@ def
 
 #==========================================================
 
-db.commit() #save changes
-db.close()  #close database
+db.commit() 
+db.close()  
