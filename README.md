@@ -12,7 +12,15 @@ e.g.: git clone git@github.com:TheChristLouie/p00_Soft_Dev.git
 Note: You will need a python virtual environment with Flask installed to run the blog site.
 
 # LAUNCH CODES:
-In Python virtual environment with Flask installed and in the cloned repo:
+In Terminal, make virtual environment:
+
+Type "$ python3 -m venv [env_name]" to install a virtual environment, where [env_name] is any name you want.
+
+Then activate your virtual environment by typing $ .  [env_name]/bin/activate (notice there is a space after the .) Make sure your virtual environment directory is included.
+
+Then type $ pip install -r requirements.txt
+
+
 
 Type in Terminal:
 

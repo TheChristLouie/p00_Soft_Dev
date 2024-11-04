@@ -27,3 +27,6 @@ added footer to all pages saying sexy mermaids
 
 christopherl -- 2024-10-31 01:28
 Summary of external README review: Our visitor helped us with catching up on tasks we were behind on, such as finding out that we did not actually upload our pdf and instead mistook our placeholder as the pdf, and that our launch/install codes were too simple. Thank you emissary!
+
+christopherl -- 2024-11-04 01:44
+Added requirements.txt to automate pip installs, and updated README to match. Stored via pip freeze.
