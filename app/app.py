@@ -18,6 +18,12 @@ secret = os.urandom(32)
 app.secret_key = secret
 
 @app.route("/")
+def disp_homepage():
+    #will know whether you are logged in or not and will allow you to edit
+    #and view posts if you are logged in
+    return render_template("homepage.html")
+
+@app.route("/login")
 def disp_loginpage():
     if 'username' in session:
         return redirect("response.html")
@@ -29,13 +35,13 @@ def authenticate():
         session['username'] = request.args.get('username')
     return render_template( 'response.html', username = session['username'])
 
-@app.route("/signup.html", methods=['GET','POST'])
+@app.route("/create", methods=['GET','POST'])
 def signup():
     if(request.args.get('username') != None):
         session['username'] = request.args.get('username')
         session['password'] = request.args.get('password')
-    addUser(session['username']),(session['password']
-    return render_template( 'signup.html', username = session['username'])
+    addUser(session['username']),(session['password'])
+    return render_template( 'create.html', username = session['username'])
     
 
 @app.route("/logout")
