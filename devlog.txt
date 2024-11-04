@@ -30,3 +30,6 @@ Summary of external README review: Our visitor helped us with catching up on tas
 
 christopherl -- 2024-11-04 01:44
 Added requirements.txt to automate pip installs, and updated README to match. Stored via pip freeze.
+
+jonathanm764 -- 2024-11-4 11:26
+added create.html and made the css and html files seperate. Also linked the html files together on the homepage
