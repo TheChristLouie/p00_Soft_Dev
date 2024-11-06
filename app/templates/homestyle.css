@@ -39,7 +39,7 @@
   left: 1;
   background-color: dimgray; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
+  padding-top: 0px;
   padding-left: 5px;
   left: 0px;
 }
@@ -60,9 +60,20 @@
 
 /* Style page content */
 .main {
-  margin-left: 400px; /* Same as the width of the sidebar */
+  margin-left: 410px; /* Same as the width of the sidebar */
+  margin-right: 10px;
+  margin-top: 50px;
   padding: 0px 10px;
   color: black;
+  height:600px;
+  width:100%-420px;
+  overflow:auto;
+  background-color:bisque;
+  color:grey;
+  scrollbar-base-color:gold;
+  font-family:sans-serif;
+  padding:10px;
+  border-radius: 10px;
 }
 
 footer {
