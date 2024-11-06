@@ -1,57 +1,41 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <link rel="stylesheet" href="loginstyle.css">
-    <title> Logout Page </title>
+    <title> Login Page </title>
   </head>
 
   <body>
     <div class="topnav">
-      <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="homepage.html">Back To Home</a>
+      <a href="{{ url_for('homepage') }}">Back To Home</a>
     </div>
 
 
     <div class="main">
     <h1>
-      You have logged out. Login to continue:
+      You have logged out. Login to get started.
     </h1>
     <h3>
       Enter your login information below to proceed:
     </h3>
-    <!-- <form action="/auth" method="POST">
-      <p>username</p>
-      <input type="text" name="username">
-      </br>
-      <p>password</p>
-      <input type="text" name="password">
-      </br>
-      </br>
-      <input type="submit" value="login" name="sub1">
-    </form>
-    <br>
-  -->
     <div class="username">
       <!--put where the person is supposed to input their username-->
-      <p>dummy text</p>
+      <form action="/auth" method="POST">
+        <p>Username:</p>
+        <input type="text" name="username">
+        </br>
+      </form>
     </div>
     <div class="password">
-      <!--put where the person is supposed to input their password-->
-      <p>more dummy text</p>
+      <p>Password:</p>
+      <input type="text" name="password">
+      </br>
     </div>
-
-    <!--DELETE THIS LATER, THIS IS JUST FOR TESTING PURPOSES-->
-    <p>
-      <a href="homepage.html">the username and password match</a> <br>
-      <a href="error.html">the username and password don't</a>
-    </p>
-    <!---------------------------------------------->
-
-
-    </body>
-  </div>
+  </br>
+  <!--submit button-->
+  <input class="button" type="submit" value="login" name="sub1">
   </body>
+  </div>
   <footer>
     By: Sexy Mermaids
   </footer>

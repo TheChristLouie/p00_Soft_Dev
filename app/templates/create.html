@@ -2,37 +2,41 @@
 <html>
   <head>
     <link rel="stylesheet" href="loginstyle.css">
-    <title>Create Account</title>
+    <title> Login Page </title>
   </head>
+
   <body>
     <div class="topnav">
       <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="homepage.html">Back To Home</a>
+      <a href="{{ url_for('homepage') }}">Back To Home</a>
     </div>
+
+
+    <div class="main">
+    <h1>
+      Create a new account.
+    </h1>
     <h3>
-      Please enter in your new username and password:
+      Enter a new username and password:
     </h3>
-    <!-- <form action="/auth" method="POST">
-      <p>username</p>
-      <input type="text" name="username">
-      </br>
-      <p>password</p>
+    <div class="username">
+      <!--put where the person is supposed to input their username-->
+      <form action="/auth" method="POST">
+        <p>Username:</p>
+        <input type="text" name="username">
+        </br>
+      </form>
+    </div>
+    <div class="password">
+      <p>Password:</p>
       <input type="text" name="password">
       </br>
-      </br>
-      <input type="submit" value="login" name="sub1">
-    </form>
-    <br>
-  -->
-  <p>
-    Username:<br>
-    (text box)<br>
-    Password:<br>
-    (text box)<br>
-    Confirm Password:<br>
-    (text box)<br>
-  </p>
+    </div>
+  </br>
+  <!--submit button-->
+  <input class="button" type="submit" value="login" name="sub1">
   </body>
+  </div>
   <footer>
     By: Sexy Mermaids
   </footer>

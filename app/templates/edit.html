@@ -8,14 +8,23 @@
 
   <body>
     <div class="topnav">
-      <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="homepage.html">Back to home</a>
-      <a href="thisBlog.html">Back to this blog</a>
+      <a href="{{ url_for('homepage') }}">Back to home</a>
+      <a href="{{ url_for('thisBlog') }}">Back to this blog</a>
     </div>
+    <div class="header">
+      <span class="name">{{bname}}</span>
+      <span class="date">{{dat}}</span>
+    </div>
+
+    <!--what is inside the beige box, and should be editable-->
     <div class="main">
-      <p>replace with a box showing the text of the blog</p>
-      <!--clicking on a blog should take the user to thisblog.html-->
+      <h2>{{title}}</h2>
+      <div class="blogText">
+        <p>{{txt}}</p><br>
+      </div>
     </div>
+
+    <!--footer-->
     <footer>
       By: Sexy Mermaids!
     </footer>

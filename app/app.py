@@ -55,10 +55,10 @@ def blog():
     # add data to the page here from the database
     return render_template('blogs.html') #there will be more than just "blog.html" here
 '''
-@app.route("/thisblog")
-def thisblog():
+@app.route("/thisBlog")
+def thisBlog():
     txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
-    return render_template('thisblog.html', title = title, entry = txt) #guessed for var names, title is the title, entry is the post
+    return render_template('thisBlog.html', title = title, entry = txt) #guessed for var names, title is the title, entry is the post
 
 
 if __name__ == "__main__":

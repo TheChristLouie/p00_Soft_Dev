@@ -9,8 +9,8 @@
   <body>
     <div class="topnav">
       <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="homepage.html">Back to home</a>
-      <a href="edit.html">Edit this blog</a>
+      <a href="{{ url_for('homepage') }}">Back to home</a>
+      <a href="{{ url_for('edit') }}">Edit this blog</a>
     </div>
     <div class="header">
       <span class="name">{{bname}}</span>

@@ -24,26 +24,28 @@
     margin: 50px;
     margin-left: 500px;
     margin-right: 500px;
-    padding: 10px 10px 300px 10px;
+    padding: 10px 10px 250px 10px;
     text-align: center;
     background-color: bisque;
     border-radius: 10px;
 }
 .username{
-    margin:10px;
-    padding: 0px 0px 10px;
-    border-color: grey;
-    border-style: solid;
-    text-align: center;
-    background-color: bisque;
+  font-weight: bold;
+  margin:10px;
+  padding: 0px 0px 10px;
+  border-color: grey;
+  border-style: solid;
+  text-align: center;
+  background-color: bisque;
 }
 .password{
-    margin:10px;
-    padding: 0px 0px 10px;
-    border-color: grey;
-    border-style: solid;
-    text-align: center;
-    background-color: bisque;
+  font-weight: bold;
+  margin:10px;
+  padding: 0px 0px 10px;
+  border-color: grey;
+  border-style: solid;
+  text-align: center;
+  background-color: bisque;
 }
 footer {
     position:fixed;
@@ -57,4 +59,8 @@ footer {
  }
  .wrong{
     color: red;
+ }
+
+ .button{
+  font-size: 20px;
  }

@@ -9,12 +9,11 @@
   <body>
     <div class="topnav">
       <a class="active">Cool Blogs</a>
-
-      <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
       <a class="new" href="edit.html">New Blog</a>
-      <a href="login.html">Login</a>
-      <a href="logout.html">Logout</a>
-      <a href="create.html">Create Account</a>
+      <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+      <a href="{{ url_for('create') }}">Create Account</a>
     </div>
     <div class="sidenav">
       <!-- THIS SHOULD CHANGE LATER, change to a list of all the user's blogs-->
@@ -23,7 +22,7 @@
     </div>
     <div class="main">
       <p>REPLACE WITH LIST OF ALL THE BLOGS</p>
-      <!--clicking on a blog should take the user to thisblog.html-->
+      <!--clicking on a blog should take the user to thisblog.html, remove the thisblog link below after testing-->
       <a href="thisBlog.html">testing link to go to blogs</a>
     </div>
     <footer>
