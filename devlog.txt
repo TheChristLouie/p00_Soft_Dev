@@ -27,3 +27,15 @@ added footer to all pages saying sexy mermaids
 
 christopherl -- 2024-10-31 01:28
 Summary of external README review: Our visitor helped us with catching up on tasks we were behind on, such as finding out that we did not actually upload our pdf and instead mistook our placeholder as the pdf, and that our launch/install codes were too simple. Thank you emissary!
+<<<<<<< HEAD
+=======
+
+christopherl -- 2024-11-04 01:44
+Added requirements.txt to automate pip installs, and updated README to match. Stored via pip freeze.
+
+jonathanm764 -- 2024-11-4 11:26
+added create.html and made the css and html files seperate. Also linked the html files together on the homepage
+
+endriti2 -- 2024-11-4 11:31
+edited app.py making some small aditions
+>>>>>>> main

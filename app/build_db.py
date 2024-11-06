@@ -1,50 +1,92 @@
-#Stella Yampolsky
-#SoftDev
-#Oct 2024
+import sqlite3
+import csv
 
-import sqlite3   #enable control of an sqlite database
-import csv       #facilitate CSV I/O
+#TO USE ANY OF THIS type:
+#import * from .build_db
+#It shoulllld creat the db + tables automatically
+DB_FILE = "blogs.db"
+db = sqlite3.connect(DB_FILE)
+c = db.cursor()
 
-#create the database + tables
-#Run before using functions
-#Run only once
+# Makes tables in the database (do not run, run at the end of the file)
+def makeDb():
+    c.execute("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, blogname TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS blogs (blogname TEXT, numEntries INTEGER)")
+    c.execute("CREATE TABLE IF NOT EXISTS entries (blogname TEXT, title TEXT, entry TEXT, date TEXT)")
+    db.commit()
 
-DB_FILE="blogs.db"
-db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
-c = db.cursor()               #facilitate db ops -- you will use cursor to trigger db events
-
-def makedb():
-    c.execute("create table users (username text, password text, blogname text)")
-    c.execute("create table blogs (blogname text, int empty)")
-    c.execute("create table entries (blogname text, title text, entry text int date)")
-#When a user registers, before they make their blog
+# Registers a user with a username and password
 def addUser(u, p):
-    c.execute("insert into users values(u, p)")
+    c.execute(f"INSERT INTO users (username, password) VALUES ('{u}', '{p}')")
+    exportUsers()
+    db.commit()
+
+# Adds a blogname to a user, creates a new blog with 0 entries
 def addBlog(user, b):
-    c.execute("insert into users select(user)(blogname) values(b)")
+    c.execute(f"UPDATE users SET blogname = '{b}' WHERE username = '{user}'")
+    c.execute(f"INSERT INTO blogs (blogname, numEntries) VALUES ('{b}', 0)")
+    exportBlogs()
+    db.commit()
 
-makedb()
-#addUser("name","1234")
+# Adds an entry to a pre-existing blog
+def addEntry(bname, title, txt, dat):
+    c.execute(f"UPDATE blogs SET numEntries = numEntries + 1 WHERE blogname = '{bname}'")
+    c.execute(f"INSERT INTO entries (blogname, title, entry, date) VALUES ('{bname}', '{title}', '{txt}', '{dat}')")
+    exportEntries()
+    db.commit()
 
-#==========================================================
-# c.execute("create table students (one text, two int, three int)")
-# c.execute("create table courses (one text, two int, three int)")
-# with open("students.csv", newline='') as file:
-#     r = csv.DictReader(file)    
-#     for row in r:
-#         c.execute(f"insert into students values('{row['name']}', '{row['age']}', '{row['id']}')")
-# file.close()
-# with open("courses.csv", newline='') as file:
-#     r = csv.DictReader(file)    
-#     for row in r:
-#         c.execute(f"insert into courses values('{row['code']}', '{row['mark']}', '{row['id']}')")
-# file.close()
+# Gets a list of entries for a specific blog given the blog name
+def getEntries(bname):
+    c.execute(f"SELECT title, entry, date FROM entries WHERE blogname = '{bname}'")
+    return c.fetchall()
 
+# Gets the user's password (for verification purposes)
+def getPass(user):
+    c.execute(f"SELECT password FROM users WHERE username = '{user}'")
+    return c.fetchone()
 
+# Gets a list of all blognames (no entries)
+def listAllBlogs():
+    c.execute("SELECT blogname FROM blogs")
+    return c.fetchall()
 
+# Deletes a blog
+def deleteBlog(bname):
+    c.execute(f"DELETE FROM blogs WHERE blogname = '{bname}'")
+    c.execute(f"DELETE FROM entries WHERE blogname = '{bname}'")
+    exportBlogs()
+    exportEntries()
+    db.commit()
 
+# Deletes a user
+def deleteUser(username):
+    c.execute(f"SELECT blogname FROM users WHERE username = '{username}'")
+    blognames = [row[0] for row in c.fetchall()]
+    for blog in blognames:
+        deleteBlog(blog)
+    c.execute(f"DELETE FROM users WHERE username = '{username}'")
+    exportUsers()
+    db.commit()
 
-#==========================================================
+# Helper function to export data to CSV
+def exportToCSV(query, filename):
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        c.execute(query)
+        writer.writerow([i[0] for i in c.description])  # Write header
+        writer.writerows(c.fetchall())  # Write data
 
-db.commit() 
-db.close()  
+# Export Users to CSV
+def exportUsers():
+    exportToCSV("SELECT * FROM users", 'users.csv')
+
+# Export Blogs to CSV
+def exportBlogs():
+    exportToCSV("SELECT * FROM blogs", 'blogs.csv')
+
+# Export Entries to CSV
+def exportEntries():
+    exportToCSV("SELECT * FROM entries", 'entries.csv')
+
+makeDb()
+db.close()
