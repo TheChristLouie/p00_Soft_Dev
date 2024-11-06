@@ -4,7 +4,7 @@
 # 1
 
 import os
-from build_db import *
+from .build_db import *
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -54,14 +54,13 @@ def logout():
 def blog():
     # add data to the page here from the database
     return render_template('blogs.html') #there will be more than just "blog.html" here
-
+'''
 @app.route("/thisblog")
 def thisblog():
-    # add data to this page based on which blog is selected, probably through an if statment
-    # in other words, take data from the blog entry with the same title as the one that was clicked on
-    return render_template('thisblog.html') #there will be more than just "thisblog.html" here
-'''
-    
+    txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
+    return render_template('thisblog.html', title = title, entry = txt) #guessed for var names, title is the title, entry is the post
+
+
 if __name__ == "__main__":
     app.debug = True 
     app.run()
