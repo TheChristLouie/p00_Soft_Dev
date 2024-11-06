@@ -40,6 +40,9 @@ def getEntries(bname):
     c.execute(f"SELECT title, entry, date FROM entries WHERE blogname = '{bname}'")
     return c.fetchall()
 
+def getEntry(Title):
+    c.execute(f"SELECT entry FROM entries WHERE title = '{Title}'")
+
 # Gets the user's password (for verification purposes)
 def getPass(user):
     c.execute(f"SELECT password FROM users WHERE username = '{user}'")
@@ -76,15 +79,15 @@ def exportToCSV(query, filename):
         writer.writerow([i[0] for i in c.description])  # Write header
         writer.writerows(c.fetchall())  # Write data
 
-# Export Users to CSV
+# Export Users to CSV (helper)
 def exportUsers():
     exportToCSV("SELECT * FROM users", 'users.csv')
 
-# Export Blogs to CSV
+# Export Blogs to CSV (helper)
 def exportBlogs():
     exportToCSV("SELECT * FROM blogs", 'blogs.csv')
 
-# Export Entries to CSV
+# Export Entries to CSV (helper)
 def exportEntries():
     exportToCSV("SELECT * FROM entries", 'entries.csv')
 
