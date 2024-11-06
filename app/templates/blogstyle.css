@@ -21,6 +21,15 @@
   }
 
 .main{
+    margin: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px 10px 300px 10px;
+    background-color: bisque;
+    border-radius: 10px;
+}
+h3 {
+  text-align: right;
 }
 footer {
     position:fixed;

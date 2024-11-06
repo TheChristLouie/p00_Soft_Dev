@@ -33,19 +33,19 @@
   -->
     <div class="username">
       <!--put where the person is supposed to input their username-->
-      <p>dummy text</p>
+      <form action="/auth" method="POST">
+        <p>username</p>
+        <input type="text" name="username">
+        </br>
+      </form>
     </div>
     <div class="password">
-      <!--put where the person is supposed to input their password-->
-      <p>more dummy text</p>
+      <p>password</p>
+      <input type="text" name="password">
+      </br>
     </div>
-
-    <!--DELETE THIS LATER, THIS IS JUST FOR TESTING PURPOSES-->
-    <p>
-      <a href="homepage.html">the username and password match</a> <br>
-      <a href="error.html">the username and password don't</a>
-    </p>
-    <!---------------------------------------------->
+  </br>
+  <input type="submit" value="login" name="sub1">
 
 
     </body>
