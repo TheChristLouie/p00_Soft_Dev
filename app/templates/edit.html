@@ -2,9 +2,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='blogstyle.css') }}">
-    <title> Home </title>
+    <title>Edit Blog</title>
   </head>
-
 
   <body>
     <div class="topnav">
@@ -19,7 +18,10 @@
 
     <div class="main">
         <h2>Create New Entry</h2>
-        <form action="/create" method="POST">
+        {% if error %}
+        <p style="color:red">{{ error }}</p>  <!-- Display error message if any -->
+        {% endif %}
+        <form action="/edit" method="POST">
             <div class="form-group">
                 <label for="newTitle">Entry Title</label>
                 <input type="text" id="newTitle" name="newTitle" placeholder="Enter Entry Title" required>
@@ -30,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="newDate">Entry Date</label>
-                <input type="date" id="newDate" name="newDate" required>
+                <input type="date" id="newDate" name="newDate" value="{{ dat }}" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit Entry">
@@ -41,6 +43,5 @@
     <footer>
         <p>By: Sexy Mermaids!</p>
     </footer>
-</body>
-
+  </body>
 </html>
