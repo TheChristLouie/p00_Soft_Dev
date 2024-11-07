@@ -2,33 +2,42 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='homestyle.css') }}">
-    <title> Home </title>
+    <title>Home</title>
   </head>
-
 
   <body>
     <div class="topnav">
       <a class="active">Cool Blogs</a>
       <a class="new" href="/edit">New Blog</a>
-      <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="/login">Login</a>
-      <a href="/logout">Logout</a>
-      <a href="/create">Create Account</a>
+      <!-- Conditional display of login/logout based on whether the user is logged in -->
+      {% if logged %}
+        <a href="/logout">Logout</a>
+        <a>Welcome, {{ uname }}!</a>
+      {% else %}
+        <a href="/login">Login</a>
+        <a href="/create">Create Account</a>
+      {% endif %}
     </div>
+
     <div class="sidenav">
-      <!-- THIS SHOULD CHANGE LATER, change to a list of all the user's blogs-->
       <h1>Your Blogs:</h1>
-      <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
+      {% if logged and myTitle %}
+        <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
+      {% else %}
+        <p>No blogs yet. Start creating one!</p>
+      {% endif %}
     </div>
+
     <div class="main">
       <p>REPLACE WITH LIST OF ALL THE BLOGS</p>
-      <!--clicking on a blog should take the user to thisblog.html, remove the thisblog link below after testing-->
+      <!-- Clicking on a blog should take the user to thisblog.html -->
       <a href="{{ url_for('thisBlog', title=title1) }}">Go to {{ title1 }}</a>
       <a href="{{ url_for('thisBlog', title=title2) }}">Go to {{ title2 }}</a>
       <a href="{{ url_for('thisBlog', title=title3) }}">Go to {{ title3 }}</a>
       <a href="{{ url_for('thisBlog', title=title4) }}">Go to {{ title4 }}</a>
       <a href="{{ url_for('thisBlog', title=title5) }}">Go to {{ title5 }}</a>
     </div>
+
     <footer>
       By: Sexy Mermaids!
     </footer>
