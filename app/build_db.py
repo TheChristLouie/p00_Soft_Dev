@@ -43,6 +43,11 @@ def getEntries(bname):
 def getEntry(Title):
     c.execute(f"SELECT entry FROM entries WHERE title = '{Title}'")
 
+# Gets a random entry from the entries table
+def getRandomEntry():
+    c.execute("SELECT blogname, title, entry, date FROM entries ORDER BY RANDOM() LIMIT 1")
+    return c.fetchone()  # Fetches a random entry
+
 # Gets the user's password (for verification purposes)
 def getPass(user):
     c.execute(f"SELECT password FROM users WHERE username = '{user}'")
