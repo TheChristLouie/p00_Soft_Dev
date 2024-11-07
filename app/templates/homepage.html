@@ -19,8 +19,8 @@
 
     <div class="sidenav">
         <h1>Your Blogs:</h1>
-        {% if logged and myBlogname %}
-            <a href="{{ url_for('thisBlog', title=myBlogname) }}">Go to {{ myBlogname }}</a>
+        {% if logged and myTitle %}
+            <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
         {% else %}
             <p>No blogs yet. Start creating one!</p>
         {% endif %}
@@ -28,8 +28,8 @@
 
     <div class="main">
         <h2>Explore Recent Blog Posts</h2>
-        {% if other_entries %}
-            {% for blogname, title, entry, date in other_entries %}
+        {% if entries %}
+            {% for blogname, title, entry, date in entries %}
                 <div class="blog-post">
                     <h3><a href="{{ url_for('thisBlog', title=title) }}">Go to {{ title }}</a></h3>
                     <p><strong>{{ blogname }}</strong> | {{ date }}</p>
@@ -46,3 +46,4 @@
     </footer>
 </body>
 </html>
+

@@ -10,28 +10,56 @@ app.secret_key = secret
 
 @app.route("/")
 def disp_homepage():
-    logged = 'username' in session
-    uname = session.get('username', "")
+    # Fetch random entries to display, only keep valid entries
+    rentry1 = getRandomEntry()
+    if not rentry1[0]:  # If no valid entry found
+        rentry1 = None
     
-    # Define myBlogname if logged in
-    myBlogname = getBlogname(uname) if logged else None
-    other_entries = []
+    rentry2 = getRandomEntry()
+    if not rentry2[0]:  # If no valid entry found
+        rentry2 = None
+    
+    rentry3 = getRandomEntry()
+    if not rentry3[0]:  # If no valid entry found
+        rentry3 = None
+    
+    rentry4 = getRandomEntry()
+    if not rentry4[0]:  # If no valid entry found
+        rentry4 = None
+    
+    rentry5 = getRandomEntry()
+    if not rentry5[0]:  # If no valid entry found
+        rentry5 = None
 
-    # Check if there are any entries to fetch
-    if logged:
-        # Gather up to 5 random entries not authored by the logged-in user
-        while len(other_entries) < 5:
-            entry = getRandomEntry()
-            if entry and entry[0] != myBlogname:  # Check if entry exists and is not from the user's blog
-                other_entries.append(entry)
+    # Prepare the entries to pass to the template
+    entries = [rentry1, rentry2, rentry3, rentry4, rentry5]
+    entries = [entry for entry in entries if entry is not None]  # Remove None entries
 
-    return render_template(
-        "homepage.html",
-        logged=logged,
-        uname=uname,
-        myBlogname=myBlogname,  # Pass the user's blog name to the template
-        other_entries=other_entries  # Pass these entries to the template
-    )
+    # Default values for blog-related data
+    myTitle, myBlogname, myText, myDate = "", "", "", ""  # Default values
+    uname = ""  # Ensure uname is always defined
+
+    # Check if logged in
+    if 'username' in session:
+        logged = True
+        uname = session['username']  # Assign uname if logged in
+        myEntry = getMostRecentEntry(uname)
+        
+        # Handle case when the user has no entries
+        if myEntry:
+            myBlogname, myTitle, myText, myDate = myEntry
+        else:
+            myBlogname, myTitle, myText, myDate = "", "", "You have no entries yet.", ""  # Default message when no entries
+    else:
+        logged = False
+    
+    return render_template("homepage.html", 
+                           myTitle=myTitle, 
+                           entries=entries, 
+                           no_entries_message=myText, 
+                           logged=logged, 
+                           uname=uname)
+
 
 
 
