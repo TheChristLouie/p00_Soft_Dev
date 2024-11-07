@@ -21,7 +21,21 @@ app.secret_key = secret
 def disp_homepage():
     #will know whether you are logged in or not and will allow you to edit
     #and view posts if you are logged in
-    return render_template("homepage.html")
+    rentry1 = getRandomEntry
+    blogname1, title1, entry1, date1 = rentry1
+    
+    rentry2 = getRandomEntry
+    blogname2, title2, entry2, date2 = rentry2
+    
+    rentry3 = getRandomEntry
+    blogname3, title3, entry3, date3 = rentry3
+    
+    rentry4 = getRandomEntry
+    blogname4, title4, entry4, date4 = rentry4
+    
+    rentry2 = getRandomEntry
+    blogname4, title4, entry4, date4 = rentry4
+    return render_template("homepage.html", title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
 
 @app.route("/login")
 def disp_loginpage():
