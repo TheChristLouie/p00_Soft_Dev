@@ -33,8 +33,8 @@ def disp_homepage():
     rentry4 = getRandomEntry
     blogname4, title4, entry4, date4 = rentry4
     
-    rentry2 = getRandomEntry
-    blogname4, title4, entry4, date4 = rentry4
+    rentry5 = getRandomEntry
+    blogname5, title5, entry5, date5 = rentry5
     return render_template("homepage.html", title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
 
 @app.route("/login")
@@ -71,7 +71,9 @@ def blog():
 '''
 @app.route("/thisBlog")
 def thisBlog():
-    txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
+    title = request.args.get('title')
+    
+    #txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
     return render_template('thisBlog.html', title = title, entry = txt) #guessed for var names, title is the title, entry is the post
 
 
