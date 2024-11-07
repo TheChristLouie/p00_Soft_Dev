@@ -39,3 +39,6 @@ edited app.py making some small aditions
 
 stellay4 -- 2024-11-6 1:03
 Pushed build_db.py to main with methods for databases + readable documentation. 
+
+endriti2 -- 2024-11-6 8:32
+Made large changes to app.py, changed getEntry and added getRandomEntry to build_db, changed some templates in order to properly display blog entries and allow for viewing
