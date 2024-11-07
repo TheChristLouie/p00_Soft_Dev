@@ -81,7 +81,14 @@ def thisBlog():
     thisTitle = request.args.get('title')
     thisEntry = getEntry(thisTitle)
     blogname, entry, date = thisEntry
-    return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry) #guessed for var names, title is the title, entry is the post
+    return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
+
+@app.route("/edit")
+def edit():
+    thisTitle = request.args.get('title')
+    thisEntry = getEntry(thisTitle)
+    blogname,entry,date = thisEntry
+    return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
 
 
 if __name__ == "__main__":
