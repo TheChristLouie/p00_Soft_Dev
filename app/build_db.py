@@ -90,6 +90,12 @@ def getPass(user):
     c = db.cursor()
     c.execute(f"SELECT password FROM users WHERE username = '{user}'")
     return c.fetchone()
+def getBlogname(username):
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT blogname FROM users WHERE username = ?", (username,))
+    result = c.fetchone()
+    return result[0] if result else None
 
 # Gets a list of all blognames (no entries)
 def listAllBlogs():
