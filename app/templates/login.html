@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="{{ url_for('static', filename='loginstyle.css') }}">
-    <title> Login Page </title>
-  </head>
+    <title>Login Page</title>
+</head>
 
-  <body>
+<body>
     <div class="topnav">
-      <a href="/">Back To Home</a>
+        <a href="/">Back To Home</a>
     </div>
-
 
     <div class="main">
-    <h1>
-      Login to get started!
-    </h1>
-    <h3>
-      Enter your login information below to proceed:
-    </h3>
-    <div class="username">
-      <!--put where the person is supposed to input their username-->
-      <form action="/auth" method="POST">
-        <p>Username:</p>
-        <input type="text" name="username">
-        </br>
-      </form>
+        <h1>Login to get started!</h1>
+        <h3>Enter your login information below to proceed:</h3>
+        
+        <form action="/auth" method="POST">
+            <div class="username">
+                <p>Username:</p>
+                <input type="text" name="username" required>
+            </div>
+            
+            <div class="password">
+                <p>Password:</p>
+                <input type="password" name="password" required>
+            </div>
+            
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            
+            <br>
+            <input class="button" type="submit" value="Login" name="sub1">
+        </form>
     </div>
-    <div class="password">
-      <p>Password:</p>
-      <input type="text" name="password">
-      </br>
-    </div>
-  </br>
-  <!--submit button-->
-  <input class="button" type="submit" value="login" name="sub1">
-  </body>
-  </div>
-  <footer>
-    By: Sexy Mermaids
-  </footer>
+    
+    <footer>
+        By: Sexy Mermaids
+    </footer>
+</body>
 </html>

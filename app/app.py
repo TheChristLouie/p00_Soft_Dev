@@ -44,11 +44,16 @@ def disp_homepage():
 def disp_loginpage():
     return render_template('login.html')
 
-@app.route("/response", methods=['GET', 'POST'])
+@app.route("/auth", methods=['POST'])
 def authenticate():
-    if(request.args.get('username') != None):
-        session['username'] = request.args.get('username')
-    return render_template('response.html', username=session['username'])
+    username = request.form.get('username')
+    password = request.form.get('password')
+    stored_password = getPass(username)
+    if stored_password and stored_password[0] == password:
+        session['username'] = username
+        return redirect("/")
+    return render_template('login.html', error="Invalid username or password")
+
 
 @app.route("/create", methods=['GET', 'POST'])
 def signup():
