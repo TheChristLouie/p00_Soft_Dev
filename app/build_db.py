@@ -144,3 +144,5 @@ def exportBlogs():
 
 def exportEntries():
     exportToCSV("SELECT * FROM entries", 'entries.csv')
+makeDb()
+db.close()

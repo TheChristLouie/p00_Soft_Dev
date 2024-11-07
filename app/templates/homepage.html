@@ -19,8 +19,8 @@
 
     <div class="sidenav">
         <h1>Your Blogs:</h1>
-        {% if logged and myTitle %}
-            <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
+        {% if logged and myBlogname %}
+            <a href="{{ url_for('thisBlog', title=myBlogname) }}">Go to {{ myBlogname }}</a>
         {% else %}
             <p>No blogs yet. Start creating one!</p>
         {% endif %}

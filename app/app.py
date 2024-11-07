@@ -12,21 +12,28 @@ app.secret_key = secret
 def disp_homepage():
     logged = 'username' in session
     uname = session.get('username', "")
+    
+    # Define myBlogname if logged in
     myBlogname = getBlogname(uname) if logged else None
     other_entries = []
 
-    # Gather up to 5 random entries not authored by the logged-in user
-    while len(other_entries) < 5:
-        entry = getRandomEntry()
-        if entry and entry[0] != myBlogname:  # Check if entry exists and is not from the user's blog
-            other_entries.append(entry)
+    # Check if there are any entries to fetch
+    if logged:
+        # Gather up to 5 random entries not authored by the logged-in user
+        while len(other_entries) < 5:
+            entry = getRandomEntry()
+            if entry and entry[0] != myBlogname:  # Check if entry exists and is not from the user's blog
+                other_entries.append(entry)
 
     return render_template(
         "homepage.html",
         logged=logged,
         uname=uname,
+        myBlogname=myBlogname,  # Pass the user's blog name to the template
         other_entries=other_entries  # Pass these entries to the template
     )
+
+
 
 @app.route("/login")
 def disp_loginpage():
@@ -67,35 +74,15 @@ def logout():
     session.pop('username', None)
     return render_template('logout.html')
 
-@app.route("/thisBlog", methods=['GET', 'POST'])
+@app.route("/thisBlog")
 def thisBlog():
-    # Get the title from the query string
     thisTitle = request.args.get('title')
-
-    if not thisTitle:
-        # If no title is provided, redirect to the homepage or show an error
-        return redirect("/")  # Or render a page with an error message
-
-    # Fetch the blog entry using the title
     thisEntry = getEntry(thisTitle)
-    
-    if not thisEntry:
-        # If no entry is found, render an error page or a message
-        return render_template('error.html', message="Blog entry not found.")
-
-    # Unpack the entry data
     blogname, entry, date = thisEntry
     return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
 
-
-from datetime import datetime
-
 @app.route("/edit", methods=['GET', 'POST'])
 def edit_post():
-    # Check if the user is logged in
-    if 'username' not in session:
-        return redirect("/login")  # Redirect to login if the user is not logged in
-
     if request.method == 'POST':
         newTitle = request.form.get('newTitle')
         newText = request.form.get('newText')
@@ -103,16 +90,15 @@ def edit_post():
 
         if newTitle and newText and newDate:
             # Add the new post to the blog
-            bname = session.get('username')  # Use the logged-in user's name as blog name
+            bname = session.get('username', 'example_blog_name')  # Use the logged-in user's name as blog name
             addEntry(bname, newTitle, newText, newDate)
 
             return redirect(f"/thisBlog?title={newTitle}")
         else:
-            return render_template('edit.html', error="Please fill in all fields.", bname=session.get('username'), dat=datetime.today().strftime('%Y-%m-%d'))
+            return render_template('edit.html', error="Please fill in all fields.")
     
-    # For GET request, render the edit form with today's date
-    return render_template('edit.html', bname=session.get('username'), dat=datetime.today().strftime('%Y-%m-%d'))
-
+    # For GET request, render the edit form (no post data yet)
+    return render_template('edit.html', bname=session.get('username', 'example_blog_name'), dat='2024-11-07')
 
 @app.route("/submit", methods=['GET', 'POST'])
 def submitEntry():
