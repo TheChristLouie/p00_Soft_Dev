@@ -18,7 +18,7 @@
     <div class="sidenav">
       <!-- THIS SHOULD CHANGE LATER, change to a list of all the user's blogs-->
       <h1>Your Blogs:</h1>
-      {{<!--a variable that is replace with all of the user's blogs-->}}
+      <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
     </div>
     <div class="main">
       <p>REPLACE WITH LIST OF ALL THE BLOGS</p>
