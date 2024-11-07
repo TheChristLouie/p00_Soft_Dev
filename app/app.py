@@ -1,8 +1,8 @@
 import os
 from build_db import *
 from flask import Flask, render_template, request, session, redirect
-import sqlite3   # Enable control of an sqlite database
-import csv       # Facilitate CSV I/O
+import sqlite3   
+import csv       
 
 app = Flask(__name__)
 secret = os.urandom(32)
@@ -110,7 +110,6 @@ def submitEntry():
     nextText = request.form.get('newText')
     nextDate = request.form.get('newDate')
     if nextTitle and nextText and nextDate:
-        # Fetch most recent entry details
         myEntry = getMostRecentEntry(session['username'])
         myBlogname, myTitle, myText, myDate = myEntry
         # Add the new entry

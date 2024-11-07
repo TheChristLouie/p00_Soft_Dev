@@ -45,3 +45,6 @@ Made large changes to app.py, changed getEntry and added getRandomEntry to build
 
 endriti2 -- 2024-11-6 23:24
 Fixed any outstanding errors from earlier changes, wrote code for editing posts/ creating new entries
+
+christopherl stellay4 -- 2024-11-7 2:44
+Added posting functionality added editing functionality fixed the homepage so it displayed blogs added login/logout/create account functionality edited and organized css files linked backend code with the frontend and cleaned up app.py code for readability
