@@ -1,3 +1,4 @@
+
 import os
 from build_db import *
 from flask import Flask, render_template, request, session, redirect
@@ -109,6 +110,7 @@ def thisBlog():
     blogname, entry, date = thisEntry
     return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
 
+
 @app.route("/edit", methods=['GET', 'POST'])
 def edit_post():
     if request.method == 'POST':
@@ -125,7 +127,14 @@ def edit_post():
         else:
             return render_template('edit.html', error="Please fill in all fields.")
     
-    # For GET request, render the edit form (no post data yet)
+    # For GET request, check if title is passed to edit an existing post
+    title = request.args.get('title')
+    if title:
+        thisEntry = getEntry(title)
+        blogname, entry, date = thisEntry
+        return render_template('edit.html', bname=session.get('username', 'example_blog_name'), dat=date, currentTitle=title, currentText=entry, currentDate=date)
+
+    # If no title, render the form for creating a new entry
     return render_template('edit.html', bname=session.get('username', 'example_blog_name'), dat='2024-11-07')
 
 @app.route("/submit", methods=['GET', 'POST'])

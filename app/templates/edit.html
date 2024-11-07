@@ -17,22 +17,22 @@
     </header>
 
     <div class="main">
-        <h2>Create New Entry</h2>
+        <h2>Edit Entry</h2>
         {% if error %}
         <p style="color:red">{{ error }}</p>  <!-- Display error message if any -->
         {% endif %}
         <form action="/edit" method="POST">
             <div class="form-group">
                 <label for="newTitle">Entry Title</label>
-                <input type="text" id="newTitle" name="newTitle" placeholder="Enter Entry Title" required>
+                <input type="text" id="newTitle" name="newTitle" placeholder="Enter Entry Title" value="{{ currentTitle }}" required>
             </div>
             <div class="form-group">
                 <label for="newText">Entry Text</label>
-                <textarea id="newText" name="newText" placeholder="Enter Entry Text" rows="4" required></textarea>
+                <textarea id="newText" name="newText" placeholder="Enter Entry Text" rows="4" required>{{ currentText }}</textarea>
             </div>
             <div class="form-group">
                 <label for="newDate">Entry Date</label>
-                <input type="date" id="newDate" name="newDate" value="{{ dat }}" required>
+                <input type="date" id="newDate" name="newDate" value="{{ currentDate }}" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit Entry">
