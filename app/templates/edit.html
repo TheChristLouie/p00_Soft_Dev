@@ -12,16 +12,21 @@
       <a href="{{ url_for('thisBlog') }}">Back to this blog</a>
     </div>
     <div class="header">
-      <span class="name">{{bname}}</span>
-      <span class="date">{{dat}}</span>
+      <span class="name"> Current blog name: {{bname}}</span>
+      <span class="date"> Current date: {{dat}}</span>
     </div>
 
     <!--what is inside the beige box, and should be editable-->
     <div class="main">
-      <h2>{{title}}</h2>
+      <h2>Current title: {{title}}</h2>
       <div class="blogText">
-        <p>{{txt}}</p><br>
+        <p>Current Text: {{txt}}</p><br>
       </div>
+      <form action="/edit" method="GET">
+        <input type="text" name="newTitle" placeholder="Enter Entry Title">
+        <input type="text" name="newText" placeholder="Enter Entry text">
+        <input type="submit" name="sub" value="newEntry">
+      </form>
     </div>
 
     <!--footer-->
