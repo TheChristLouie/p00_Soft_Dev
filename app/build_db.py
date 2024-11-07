@@ -2,10 +2,15 @@ import sqlite3
 import csv
 
 DB_FILE = "blogs.db"
-db = sqlite3.connect(DB_FILE)
+db = sqlite3.connect(DB_FILE, check_same_thread=False)
 c = db.cursor()
 
-# Makes tables in the database (do not run, run at the end of the file)
+# Function to create a new database connection per request (Flask-friendly)
+def get_db():
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    return db
+
+# Makes tables in the database (run this once, or after changes)
 def makeDb():
     db = get_db()
     c = db.cursor()
@@ -125,4 +130,11 @@ def exportToCSV(query, filename):
         writer.writerow([i[0] for i in c.description])  # Write header
         writer.writerows(c.fetchall())  # Write data
 
-# Export Users to CSV (helper
+def exportUsers():
+    exportToCSV("SELECT * FROM users", 'users.csv')
+
+def exportBlogs():
+    exportToCSV("SELECT * FROM blogs", 'blogs.csv')
+
+def exportEntries():
+    exportToCSV("SELECT * FROM entries", 'entries.csv')

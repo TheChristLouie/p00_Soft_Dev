@@ -22,8 +22,6 @@ uname = "" #THESE NEED TO BE UPDATED AFTER LOGGING IN TO TRUE AND THE USERNAME O
 
 @app.route("/")
 def disp_homepage():
-    #will know whether you are logged in or not and will allow you to edit
-    #and view posts if you are logged in
     # Fetch random entries to display
     rentry1 = getRandomEntry() or (None, None, None, None)
     blogname1, title1, entry1, date1 = rentry1
@@ -48,15 +46,17 @@ def disp_homepage():
         logged = True
         uname = session['username']
         myEntry = getMostRecentEntry(uname)
-        myBlogname, myTitle, myText, myDate = myEntry
+        if myEntry:
+            myBlogname, myTitle, myText, myDate = myEntry  # Unpack the latest entry if it exists
     else:
         logged = False
     return render_template("homepage.html", myTitle=myTitle, title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
 
+
 @app.route("/login")
 def disp_loginpage():
-    if 'username' in session:
-        return redirect("response.html")
+    #if 'username' in session:
+        #Placeholder
     return render_template( 'login.html' )
 
 @app.route("/response" , methods=['GET','POST'])
@@ -67,14 +67,19 @@ def authenticate():
 
 @app.route("/create", methods=['GET', 'POST'])
 def signup():
-    if username and password:
-        existing_user = getPass(username)
-        if existing_user:
-            return render_template('create.html', error="Username already exists") 
-        addUser(username, password)
-        session['username'] = username  
-        return redirect("/")
-
+    if request.method == 'POST':  # Check if the form was submitted
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username and password:
+            existing_user = getPass(username)
+            if existing_user:
+                return render_template('create.html', error="Username already exists") 
+            addUser(username, password)
+            session['username'] = username
+            return redirect("/")  # Redirect to the homepage after successful signup
+        else:
+            return render_template('create.html', error="Please provide both a username and a password")
+    return render_template('create.html')  # Render the sign-up page on GET request
 
 @app.route("/logout")
 def logout():
@@ -101,7 +106,7 @@ def edit():
     blogname,entry,date = thisEntry
     return render_template('edit.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
 
-@app.route("/submit", methods=['GET"])
+@app.route("/submit", methods=['GET', 'POST'])
 def submitEntry():
     nextTitle = request.args.get('newTitle')
     nextText = request.args.get('newText')

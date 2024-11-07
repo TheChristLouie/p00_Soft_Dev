@@ -4,40 +4,37 @@
     <link rel="stylesheet" href="loginstyle.css">
     <title> Login Page </title>
   </head>
-
   <body>
     <div class="topnav">
       <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
-      <a href="{{ url_for('homepage') }}">Back To Home</a>
+      <a href="/">Back To Home</a>
     </div>
-
-
     <div class="main">
-    <h1>
-      Create a new account.
-    </h1>
-    <h3>
-      Enter a new username and password:
-    </h3>
-    <div class="username">
-      <!--put where the person is supposed to input their username-->
-      <form action="/auth" method="POST">
-        <p>Username:</p>
-        <input type="text" name="username">
+      <h1>
+        Create a new account.
+      </h1>
+      <h3>
+        Enter a new username and password:
+      </h3>
+      <div class="username">
+        <!--put where the person is supposed to input their username-->
+        <form action="/create" method="POST">
+          <p>Username:</p>
+          <input type="text" name="username">
+          </br>
+      </div>
+      <div class="password">
+        <p>Password:</p>
+        <input type="text" name="password">
         </br>
+      </div>
+      </br>
+      <!--submit button-->
+      <input class="button" type="submit" value="Create Account">
       </form>
     </div>
-    <div class="password">
-      <p>Password:</p>
-      <input type="text" name="password">
-      </br>
-    </div>
-  </br>
-  <!--submit button-->
-  <input class="button" type="submit" value="login" name="sub1">
+    <footer>
+      By: Sexy Mermaids
+    </footer>
   </body>
-  </div>
-  <footer>
-    By: Sexy Mermaids
-  </footer>
 </html>
