@@ -90,7 +90,17 @@ def edit():
     thisTitle = request.args.get('title')
     thisEntry = getEntry(thisTitle)
     blogname,entry,date = thisEntry
-    return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
+    return render_template('edit.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
+
+@app.route("/submit", methods=['GET"])
+def submitEntry():
+    nextTitle = request.args.get('newTitle')
+    nextText = request.args.get('newText')
+    nextDate = request.args.get('newDate')
+    myEntry = getMostRecentEntry(uname)
+    myBlogname, myTitle, myText, myDate = myEntry
+    addEntry(myBlogname, nextTitle, nextText, nextDate)
+    return render_template('thisBlog.html', bname=myBlogname, dat=nextDate, Title=nextTItle, txt=nextText)
 
 
 if __name__ == "__main__":
