@@ -10,14 +10,14 @@
     <div class="topnav">
       <!-- THIS SHOULD CHANGE LATER, change the links to the active server links-->
       <a href="{{ url_for('homepage') }}">Back to home</a>
-      <a href="{{ url_for('edit') }}">Edit this blog</a>
+      <a href="{{ url_for('edit', title=Title) }}">Edit this blog</a>
     </div>
     <div class="header">
       <span class="name">{{bname}}</span>
       <span class="date">{{dat}}</span>
     </div>
     <div class="main">
-      <h2>{{title}}</h2>
+      <h2>{{Title}}</h2>
       <div class="blogText">
         <p>{{txt}}</p><br>
       </div>
