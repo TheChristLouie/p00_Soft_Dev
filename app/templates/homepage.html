@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="{{ url_for('static', filename='homestyle.css') }}">
     <title>Home</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <div class="topnav">
-      <a class="active">Cool Blogs</a>
-      <a class="new" href="/edit">New Blog</a>
-      <!-- Conditional display of login/logout based on whether the user is logged in -->
-      {% if logged %}
-        <a href="/logout">Logout</a>
-        <a>Welcome, {{ uname }}!</a>
-      {% else %}
-        <a href="/login">Login</a>
-        <a href="/create">Create Account</a>
-      {% endif %}
+        <a class="active">Cool Blogs</a>
+        <a class="new" href="/edit">New Blog</a>
+        {% if logged %}
+            <a href="/logout">Logout</a>
+            <a>Welcome, {{ uname }}!</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/create">Create Account</a>
+        {% endif %}
     </div>
 
     <div class="sidenav">
-      <h1>Your Blogs:</h1>
-      {% if logged and myTitle %}
-        <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
-      {% else %}
-        <p>No blogs yet. Start creating one!</p>
-      {% endif %}
+        <h1>Your Blogs:</h1>
+        {% if logged and myTitle %}
+            <a href="{{ url_for('thisBlog', title=myTitle) }}">Go to {{ myTitle }}</a>
+        {% else %}
+            <p>No blogs yet. Start creating one!</p>
+        {% endif %}
     </div>
 
     <div class="main">
-      <p>REPLACE WITH LIST OF ALL THE BLOGS</p>
-      <!-- Clicking on a blog should take the user to thisblog.html -->
-      <a href="{{ url_for('thisBlog', title=title1) }}">Go to {{ title1 }}</a>
-      <a href="{{ url_for('thisBlog', title=title2) }}">Go to {{ title2 }}</a>
-      <a href="{{ url_for('thisBlog', title=title3) }}">Go to {{ title3 }}</a>
-      <a href="{{ url_for('thisBlog', title=title4) }}">Go to {{ title4 }}</a>
-      <a href="{{ url_for('thisBlog', title=title5) }}">Go to {{ title5 }}</a>
+        <h2>Explore Recent Blog Posts</h2>
+        {% if other_entries %}
+            {% for blogname, title, entry, date in other_entries %}
+                <div class="blog-post">
+                    <h3><a href="{{ url_for('thisBlog', title=title) }}">Go to {{ title }}</a></h3>
+                    <p><strong>{{ blogname }}</strong> | {{ date }}</p>
+                    <p>{{ entry }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No blog posts available at the moment.</p>
+        {% endif %}
     </div>
 
     <footer>
-      By: Sexy Mermaids!
+        By: Sexy Mermaids!
     </footer>
-  </body>
+</body>
 </html>

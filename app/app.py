@@ -10,35 +10,23 @@ app.secret_key = secret
 
 @app.route("/")
 def disp_homepage():
-    # Fetch random entries to display
-    rentry1 = getRandomEntry() or (None, None, None, None)
-    blogname1, title1, entry1, date1 = rentry1
+    logged = 'username' in session
+    uname = session.get('username', "")
+    myBlogname = getBlogname(uname) if logged else None
+    other_entries = []
 
-    rentry2 = getRandomEntry() or (None, None, None, None)
-    blogname2, title2, entry2, date2 = rentry2
+    # Gather up to 5 random entries not authored by the logged-in user
+    while len(other_entries) < 5:
+        entry = getRandomEntry()
+        if entry and entry[0] != myBlogname:  # Check if entry exists and is not from the user's blog
+            other_entries.append(entry)
 
-    rentry3 = getRandomEntry() or (None, None, None, None)
-    blogname3, title3, entry3, date3 = rentry3
-
-    rentry4 = getRandomEntry() or (None, None, None, None)
-    blogname4, title4, entry4, date4 = rentry4
-
-    rentry5 = getRandomEntry() or (None, None, None, None)
-    blogname5, title5, entry5, date5 = rentry5
-
-    # Default values for blog-related data
-    myTitle, myBlogname, myText, myDate = "", "", "", ""  # Default values
-
-    # Check if logged in
-    logged = False
-    uname = ""
-    if 'username' in session:
-        logged = True
-        uname = session['username']
-        myEntry = getMostRecentEntry(uname)
-        if myEntry:
-            myBlogname, myTitle, myText, myDate = myEntry  # Unpack the latest entry if it exists
-    return render_template("homepage.html", logged=logged, uname=uname, myTitle=myTitle,title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
+    return render_template(
+        "homepage.html",
+        logged=logged,
+        uname=uname,
+        other_entries=other_entries  # Pass these entries to the template
+    )
 
 @app.route("/login")
 def disp_loginpage():
