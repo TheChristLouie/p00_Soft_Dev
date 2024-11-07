@@ -45,12 +45,25 @@ def addEntry(bname, title, txt, dat):
     exportEntries()
     db.commit()
 
+
 # Gets a list of entries for a specific blog given the blog name
 def getEntries(bname):
     db = get_db()
     c = db.cursor()
     c.execute(f"SELECT title, entry, date FROM entries WHERE blogname = '{bname}'")
     return c.fetchall()
+
+# Update an existing blog entry
+def updateEntry(oldTitle, newTitle, newText, newDate):
+    db = get_db()
+    c = db.cursor()
+
+    # Update the entry based on the old title
+    c.execute(f'''UPDATE entries 
+                 SET title = '{newTitle}', entry = '{newText}', date = '{newDate}' 
+                 WHERE title = '{oldTitle}' ''')
+    
+    db.commit()
 
 # Gets a specific entry based on title
 def getEntry(title):
@@ -83,6 +96,14 @@ def getMostRecentEntry(username):
     """, (username,))
 
     return c.fetchone()
+
+def getEntry(title):
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT blogname, entry, date FROM entries WHERE title = ?", (title,))
+    result = c.fetchone()  
+    return result  
+
 
 # Gets the user's password (for verification purposes)
 def getPass(user):

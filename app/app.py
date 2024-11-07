@@ -76,12 +76,16 @@ def logout():
     session.pop('username', None)
     return render_template('logout.html')#Similar to login page, just removes session
 
-@app.route("/thisBlog")#used to display blogs. All blog displays follow this format.
+@app.route("/thisBlog")
 def thisBlog():
     thisTitle = request.args.get('title')
     thisEntry = getEntry(thisTitle)
-    blogname, entry, date = thisEntry
-    return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
+    
+    if thisEntry:  # Check if an entry is returned
+        blogname, entry, date = thisEntry
+        return render_template('thisBlog.html', bname=blogname, dat=date, Title=thisTitle, txt=entry)
+    else:
+        return render_template('thisBlog.html', error="Entry not found.")
 
 @app.route("/edit", methods=['GET', 'POST'])
 def edit_post():
@@ -89,18 +93,20 @@ def edit_post():
         newTitle = request.form.get('newTitle')
         newText = request.form.get('newText')
         newDate = request.form.get('newDate')
+
         if newTitle and newText and newDate:
-            bname = session.get('username', 'example_blog_name') #Example blog takes the user's username for an example
-            addEntry(bname, newTitle, newText, newDate)
+            bname = session.get('username', 'example_blog_name') 
+            existing_entry = getEntry(newTitle)
+            if existing_entry:
+                db = get_db()
+                c = db.cursor()
+                c.execute("UPDATE entries SET entry = ?, date = ? WHERE title = ?", (newText, newDate, newTitle))
+                db.commit()          
+            else:
+                addEntry(bname, newTitle, newText, newDate)
             return redirect(f"/thisBlog?title={newTitle}")
         else:
             return render_template('edit.html', error="Please fill in all fields.")
-    title = request.args.get('title')#Check if title is passed to edit existing post
-    if title:
-        thisEntry = getEntry(title)
-        blogname, entry, date = thisEntry
-        return render_template('edit.html', bname=session.get('username', 'example_blog_name'), dat=date, currentTitle=title, currentText=entry, currentDate=date)
-    # If no title, render creating new entry
     return render_template('edit.html', bname=session.get('username', 'example_blog_name'), dat='2024-11-07')
 
 '''
