@@ -5,7 +5,7 @@ import csv
 #import * from .build_db
 #It shoulllld creat the db + tables automatically
 DB_FILE = "blogs.db"
-db = sqlite3.connect(DB_FILE)
+db = sqlite3.connect(DB_FILE, check_same_thread=False)
 c = db.cursor()
 
 # Makes tables in the database (do not run, run at the end of the file)

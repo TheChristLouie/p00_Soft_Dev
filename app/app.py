@@ -4,7 +4,7 @@
 # 1
 
 import os
-from .build_db import *
+from build_db import *
 from flask import Flask
 from flask import render_template
 from flask import request
