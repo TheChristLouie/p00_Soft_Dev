@@ -2,13 +2,10 @@ import sqlite3
 import csv
 
 DB_FILE = "blogs.db"
+db = sqlite3.connect(DB_FILE)
+c = db.cursor()
 
-# Function to create a new database connection per request (Flask-friendly)
-def get_db():
-    db = sqlite3.connect(DB_FILE, check_same_thread=False)
-    return db
-
-# Makes tables in the database (run this once, or after changes)
+# Makes tables in the database (do not run, run at the end of the file)
 def makeDb():
     db = get_db()
     c = db.cursor()
