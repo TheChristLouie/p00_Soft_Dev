@@ -24,19 +24,19 @@ uname = "" #THESE NEED TO BE UPDATED AFTER LOGGING IN TO TRUE AND THE USERNAME O
 def disp_homepage():
     #will know whether you are logged in or not and will allow you to edit
     #and view posts if you are logged in
-    rentry1 = getRandomEntry
+    rentry1 = getRandomEntry()
     blogname1, title1, entry1, date1 = rentry1
     
-    rentry2 = getRandomEntry
+    rentry2 = getRandomEntry()
     blogname2, title2, entry2, date2 = rentry2
     
-    rentry3 = getRandomEntry
+    rentry3 = getRandomEntry()
     blogname3, title3, entry3, date3 = rentry3
     
-    rentry4 = getRandomEntry
+    rentry4 = getRandomEntry()
     blogname4, title4, entry4, date4 = rentry4
     
-    rentry5 = getRandomEntry
+    rentry5 = getRandomEntry()
     blogname5, title5, entry5, date5 = rentry5
 
     if logged:
@@ -56,14 +56,16 @@ def authenticate():
         session['username'] = request.args.get('username')
     return render_template( 'response.html', username = session['username'])
 
-@app.route("/create", methods=['GET','POST'])
+@app.route("/create", methods=['GET', 'POST'])
 def signup():
-    if(request.args.get('username') != None):
-        session['username'] = request.args.get('username')
-        session['password'] = request.args.get('password')
-    addUser(session['username']),(session['password'])
-    return render_template( 'create.html', username = session['username'])
-    
+    if username and password:
+        existing_user = getPass(username)
+        if existing_user:
+            return render_template('create.html', error="Username already exists") 
+        addUser(username, password)
+        session['username'] = username  
+        return redirect("/")
+
 
 @app.route("/logout")
 def logout():
