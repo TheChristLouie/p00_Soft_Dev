@@ -71,10 +71,11 @@ def blog():
 '''
 @app.route("/thisBlog")
 def thisBlog():
-    title = request.args.get('title')
-    
+    thisTitle = request.args.get('title')
+    thisEntry = getEntry(thisTitle)
+    blogname, entry, date = thisEntry
     #txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
-    return render_template('thisBlog.html', title = title, entry = txt) #guessed for var names, title is the title, entry is the post
+    return render_template('thisBlog.html', bname=blogname, dat=date, title=thisTitle, txt=entry) #guessed for var names, title is the title, entry is the post
 
 
 if __name__ == "__main__":
