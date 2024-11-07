@@ -17,6 +17,9 @@ app = Flask(__name__)
 secret = os.urandom(32)
 app.secret_key = secret
 
+logged = False
+uname = "" #THESE NEED TO BE UPDATED AFTER LOGGING IN TO TRUE AND THE USERNAME OF THE PERSON WHO LOGGED IN
+
 @app.route("/")
 def disp_homepage():
     #will know whether you are logged in or not and will allow you to edit
@@ -35,7 +38,11 @@ def disp_homepage():
     
     rentry5 = getRandomEntry
     blogname5, title5, entry5, date5 = rentry5
-    return render_template("homepage.html", title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
+
+    if logged:
+        myEntry = getMostRecentEntry(uname)
+        myBlogname, myTitle, myText, myDate = myEntry
+    return render_template("homepage.html", myTitle=myTitle, title1=title1, title2=title2, title3=title3, title4=title4, title5=title5)
 
 @app.route("/login")
 def disp_loginpage():
@@ -74,7 +81,6 @@ def thisBlog():
     thisTitle = request.args.get('title')
     thisEntry = getEntry(thisTitle)
     blogname, entry, date = thisEntry
-    #txt = getEntry(title)#need I think a global variable for title? title is the title just clicked on
     return render_template('thisBlog.html', bname=blogname, dat=date, title=thisTitle, txt=entry) #guessed for var names, title is the title, entry is the post
 
 
