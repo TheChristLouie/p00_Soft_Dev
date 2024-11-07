@@ -100,7 +100,7 @@ def submitEntry():
     myEntry = getMostRecentEntry(uname)
     myBlogname, myTitle, myText, myDate = myEntry
     addEntry(myBlogname, nextTitle, nextText, nextDate)
-    return render_template('thisBlog.html', bname=myBlogname, dat=nextDate, Title=nextTItle, txt=nextText)
+    return render_template('thisBlog.html', bname=myBlogname, dat=nextDate, Title=nextTitle, txt=nextText)
 
 
 if __name__ == "__main__":
