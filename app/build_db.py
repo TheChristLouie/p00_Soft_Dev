@@ -40,8 +40,9 @@ def getEntries(bname):
     c.execute(f"SELECT title, entry, date FROM entries WHERE blogname = '{bname}'")
     return c.fetchall()
 
-def getEntry(Title):
-    c.execute(f"SELECT entry FROM entries WHERE title = '{Title}'")
+def getEntry(title):
+    c.execute("SELECT blogname, entry, date FROM entries WHERE title = ?", (title,))
+    return c.fetchone()  # This returns the first matching row, or None if no match is found
 
 # Gets a random entry from the entries table
 def getRandomEntry():
