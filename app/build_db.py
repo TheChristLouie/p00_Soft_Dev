@@ -49,6 +49,45 @@ def getRandomEntry():
     c.execute("SELECT blogname, title, entry, date FROM entries ORDER BY RANDOM() LIMIT 1")
     return c.fetchone()  # Fetches a random entry
 
+
+No problem! To retrieve the blogname, title, entry, and date for the most recent blog entry, you can simply adjust the SQL query to select all four fields (blogname, title, entry, and date).
+
+Updated SQL Query:
+sql
+Copy code
+SELECT b.blogname, e.title, e.entry, e.date
+FROM entries e
+JOIN blogs b ON e.blogname = b.blogname
+JOIN users u ON b.blogname = u.blogname
+WHERE u.username = ?
+ORDER BY e.date DESC
+LIMIT 1
+Explanation:
+b.blogname: The blogname from the blogs table.
+e.title: The title from the entries table.
+e.entry: The entry (content of the blog post) from the entries table.
+e.date: The date from the entries table.
+ORDER BY e.date DESC: This sorts the entries by date in descending order to get the most recent entry.
+LIMIT 1: Limits the result to just one row, which will be the most recent entry.
+Updated Python Code:
+Here’s how you can fetch the blogname, title, entry, and date from this query:
+
+python
+Copy code
+def getMostRecentEntry(username):
+    # Get the most recent entry for the user's blog, including blogname, title, entry, and date
+    c.execute("""
+        SELECT b.blogname, e.title, e.entry, e.date
+        FROM entries e
+        JOIN blogs b ON e.blogname = b.blogname
+        JOIN users u ON b.blogname = u.blogname
+        WHERE u.username = ?
+        ORDER BY e.date DESC
+        LIMIT 1
+    """, (username,))
+
+    return c.fetchone()
+
 # Gets the user's password (for verification purposes)
 def getPass(user):
     c.execute(f"SELECT password FROM users WHERE username = '{user}'")
